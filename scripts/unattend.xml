@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="generalize">
+        <component name="Microsoft-Windows-Security-SPP" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <SkipRearm>0</SkipRearm>
+        </component>
+        <!--
+        <component name="Microsoft-Windows-PnpSysprep" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <PersistAllDeviceInstalls>false</PersistAllDeviceInstalls>
+            <DoNotCleanUpNonPresentDevices>false</DoNotCleanUpNonPresentDevices>
+        </component>
+        -->
+    </settings>
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="x86" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="https://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <InputLocale>0409:00000409</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <AutoLogon>
+                <Password>
+                    <Value>Incheon-2022</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <LogonCount>2</LogonCount>
+                <Username>Administrator</Username>
+            </AutoLogon>
+			<FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+                    <Description>Set Execution Policy 64 Bit</Description>
+                    <Order>1</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>C:\Windows\SysWOW64\cmd.exe /c powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+                    <Description>Set Execution Policy 32 Bit</Description>
+                    <Order>2</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm quickconfig -q</CommandLine>
+                    <Description>winrm quickconfig -q</Description>
+                    <Order>3</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm quickconfig -transport:http</CommandLine>
+                    <Description>winrm quickconfig -transport:http</Description>
+                    <Order>4</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm set winrm/config @{MaxTimeoutms="1800000"}</CommandLine>
+                    <Description>Win RM MaxTimoutms</Description>
+                    <Order>5</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm set winrm/config/winrs @{MaxMemoryPerShellMB="800"}</CommandLine>
+                    <Description>Win RM MaxMemoryPerShellMB</Description>
+                    <Order>6</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm set winrm/config/service @{AllowUnencrypted="true"}</CommandLine>
+                    <Description>Win RM AllowUnencrypted</Description>
+                    <Order>7</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm set winrm/config/service/auth @{Basic="true"}</CommandLine>
+                    <Description>Win RM auth Basic</Description>
+                    <Order>8</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm set winrm/config/client/auth @{Basic="true"}</CommandLine>
+                    <Description>Win RM client auth Basic</Description>
+                    <Order>9</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c winrm set winrm/config/listener?Address=*+Transport=HTTP @{Port="5985"} </CommandLine>
+                    <Description>Win RM listener Address/Port</Description>
+                    <Order>10</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c netsh advfirewall firewall set rule group="remote administration" new enable=yes </CommandLine>
+                    <Description>Win RM adv firewall enable</Description>
+                    <Order>11</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c netsh firewall add portopening TCP 5985 "Port 5985" </CommandLine>
+                    <Description>Win RM port open</Description>
+                    <Order>12</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c net stop winrm </CommandLine>
+                    <Description>Stop Win RM Service </Description>
+                    <Order>13</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c sc config winrm start= auto</CommandLine>
+                    <Description>Win RM Autostart</Description>
+                    <Order>14</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c net start winrm</CommandLine>
+                    <Description>Start Win RM Service</Description>
+                    <Order>15</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v HideFileExt /t REG_DWORD /d 0 /f</CommandLine>
+                    <Order>16</Order>
+                    <Description>Show file extensions in Explorer</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\Console /v QuickEdit /t REG_DWORD /d 1 /f</CommandLine>
+                    <Order>17</Order>
+                    <Description>Enable QuickEdit mode</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v Start_ShowRun /t REG_DWORD /d 1 /f</CommandLine>
+                    <Order>18</Order>
+                    <Description>Show Run command in Start Menu</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ /v StartMenuAdminTools /t REG_DWORD /d 1 /f</CommandLine>
+                    <Order>19</Order>
+                    <Description>Show Administrative Tools in Start Menu</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD HKLM\SYSTEM\CurrentControlSet\Control\Power\ /v HibernateFileSizePercent /t REG_DWORD /d 0 /f</CommandLine>
+                    <Order>20</Order>
+                    <Description>Zero Hibernation File</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>%SystemRoot%\System32\reg.exe ADD HKLM\SYSTEM\CurrentControlSet\Control\Power\ /v HibernateEnabled /t REG_DWORD /d 0 /f</CommandLine>
+                    <Order>21</Order>
+                    <Description>Disable Hibernation Mode</Description>
+                </SynchronousCommand>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>cmd.exe /c powercfg -setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c</CommandLine>
+                    <Order>22</Order>
+                    <Description>Power plan set to High Performance</Description>
+                </SynchronousCommand>
+            </FirstLogonCommands>
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+                <NetworkLocation>Work</NetworkLocation>
+                <ProtectYourPC>1</ProtectYourPC>
+                <SkipUserOOBE>true</SkipUserOOBE>
+                <SkipMachineOOBE>true</SkipMachineOOBE>
+            </OOBE>
+            <UserAccounts>
+                <AdministratorPassword>
+                    <Value>Incheon-2022</Value>
+                    <PlainText>true</PlainText>
+                </AdministratorPassword>
+            </UserAccounts>
+            <RegisteredOwner/>
+        </component>
+    </settings>
+    <settings pass="specialize">
+        <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <ComputerName>win2019</ComputerName>
+            <CopyProfile>false</CopyProfile>
+        </component>
+    </settings>
+</unattend>

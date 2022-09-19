@@ -1,0 +1,128 @@
+all:
+  hosts:
+      #Linux Hosts
+      LIN1:
+        ansible_host: 10.22.0.1
+        hostname: "APPLIX-LINUXHOST-001"
+        webcolor: "blue"
+      LIN2:
+        ansible_host: 10.22.0.2
+        hostname: "APPLIX-LINUXHOST-002"
+        webcolor: "green"
+      LIN3:
+        ansible_host: 10.22.0.3
+        hostname: "APPLIX-LINUXHOST-003"
+        webcolor: "yellow"  
+      LIN4:
+        ansible_host: 10.22.0.4
+        hostname: "APPLIX-LINUXHOST-004"
+        webcolor: "red"
+      LIN5:
+        ansible_host: 10.22.0.5
+        hostname: "APPLIX-LINUXHOST-005"     
+        webcolor: "orange"
+      #Windows Hosts
+      WIN1:
+        ansible_host: 10.22.0.101
+        hostname: "PETER"
+        RootCAPriv: true
+      WIN2:
+        ansible_host: 10.22.0.102
+        hostname: "MAX"
+        RootCAPriv: false
+      WIN3:
+        ansible_host: 10.22.0.103
+        hostname: "BEN"
+        RootCAPriv: false
+      WIN4:
+        ansible_host: 10.22.0.104
+        hostname: "ANNA"
+        RootCAPriv: false
+      WIN5:
+        ansible_host: 10.22.0.105
+        hostname: "LISA"
+        RootCAPriv: true
+      #Cisco Hosts
+      RTR1:
+        ansible_host: 10.22.0.201
+        hostname: "APPLIX-ROUTER-001"
+      RTR2:
+        ansible_host: 10.22.0.202
+        hostname: "APPLIX-ROUTER-002"
+      RTR3:
+        ansible_host: 10.22.0.203
+        hostname: "APPLIX-ROUTER-003"
+      RTR4:
+        ansible_host: 10.22.0.204
+        hostname: "APPLIX-ROUTER-004"
+      RTR5:
+        ansible_host: 10.22.0.205
+        hostname: "APPLIX-ROUTER-005"
+      RTR6:
+        ansible_host: 10.22.0.206
+        hostname: "APPLIX-ROUTER-006"
+      RTR7:
+        ansible_host: 10.22.0.207
+        hostname: "APPLIX-ROUTER-007"
+      RTR8:
+        ansible_host: 10.22.0.208
+        hostname: "APPLIX-ROUTER-008"
+  children:
+    linux:
+      vars:
+        ansible_connection: winrm
+        ansible_port: 5985
+      children:
+        web:
+          hosts:
+            LIN1:
+            LIN4:
+          vars:
+            webport: "8000"
+        ha:
+          hosts:
+            LIN3:
+            LIN5:
+            LIN2:
+        dns:
+          hosts:
+            LIN2:
+            LIN3:
+            LIN4:
+            LIN5:
+        monitoring:
+          hosts:
+            LIN1:
+            LIN3:
+            LIN5:
+    windows:
+      children:
+        dc:
+          hosts:
+            WIN1:
+            WIN2:
+        iis:
+          hosts:
+            WIN3:
+            WIN4:
+            WIN5:
+    cisco:
+      children:
+        internal:
+          hosts:
+            RTR1:
+            RTR2:
+            RTR3:
+            RTR4:
+        edge:
+          hosts:            
+            RTR5:
+            RTR6:
+        external:
+          hosts:   
+            RTR7:
+            RTR8:
+      vars:
+        bgp_as_external: "2022"
+        bgp_as_internal: "65022"
+        loop_net: "172.19.216.128/25"        

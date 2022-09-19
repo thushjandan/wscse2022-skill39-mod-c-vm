@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Art Fade",
+        "domain_prefix": "art",
+        "username": "designer1",
+        "password": "a$sd21aldGm-3A",
+        "message": "Welcome to my art site"
+    },
+    {
+        "name": "Management Corporation",
+        "domain_prefix": "management",
+        "username": "admin-mgr",
+        "password": "SecureManagPassword$123",
+        "message": "Management Corporation Website - Please contact manager@management.customer.com for more infos"
+    },
+    {
+        "name": "Transport Bus Stations",
+        "domain_prefix": "transport",
+        "username": "transport-admin",
+        "password": "FastFromA-to-B4",
+        "message": "This site is currently under maintenance. Please visit later"
+    },
+    {
+        "name": "Wood Works",
+        "domain_prefix": "wood",
+        "username": "daniel",
+        "password": "Wo_Do_Wood_Work1",
+        "message": "Are you looking for a carpenter? Please hire us via info@woodworks.com"
+    },    
+    {
+        "name": "Smart Fitness",
+        "domain_prefix": "fit",
+        "username": "sport-man-1",
+        "password": "WorkOut36$13",
+        "message": "We will get your fitness to the next level, visit us at baker street 5 in california"
+    }
+]

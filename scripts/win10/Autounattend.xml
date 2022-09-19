@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+    <settings pass="windowsPE">
+        <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <SetupUILanguage>
+                <UILanguage>en-US</UILanguage>
+            </SetupUILanguage>
+            <InputLocale>en-US</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <DiskConfiguration>
+                <Disk wcm:action="add">
+                    <CreatePartitions>
+                        <CreatePartition wcm:action="add">
+                            <Type>Primary</Type>
+                            <Order>1</Order>
+                            <Size>350</Size>
+                        </CreatePartition>
+                        <CreatePartition wcm:action="add">
+                            <Order>2</Order>
+                            <Type>Primary</Type>
+                            <Extend>true</Extend>
+                        </CreatePartition>
+                    </CreatePartitions>
+                    <ModifyPartitions>
+                        <ModifyPartition wcm:action="add">
+                            <Active>true</Active>
+                            <Format>NTFS</Format>
+                            <Label>boot</Label>
+                            <Order>1</Order>
+                            <PartitionID>1</PartitionID>
+                        </ModifyPartition>
+                        <ModifyPartition wcm:action="add">
+                            <Format>NTFS</Format>
+                            <Label>Windows 10</Label>
+                            <Letter>C</Letter>
+                            <Order>2</Order>
+                            <PartitionID>2</PartitionID>
+                        </ModifyPartition>
+                    </ModifyPartitions>
+                    <DiskID>0</DiskID>
+                    <WillWipeDisk>true</WillWipeDisk>
+                </Disk>
+            </DiskConfiguration>
+            <ImageInstall>
+                <OSImage>
+                    <InstallFrom>
+                        <MetaData wcm:action="add">
+                            <Key>/IMAGE/NAME </Key>
+                            <Value>Windows 10 Pro</Value>
+                        </MetaData>
+                    </InstallFrom>
+                    <InstallTo>
+                        <DiskID>0</DiskID>
+                        <PartitionID>2</PartitionID>
+                    </InstallTo>
+                </OSImage>
+            </ImageInstall>
+            <UserData>
+                <!-- Product Key from http://technet.microsoft.com/en-us/library/jj612867.aspx -->
+                <ProductKey>
+                    <!-- Do not uncomment the Key element if you are using trial ISOs -->
+                    <!-- You must uncomment the Key element (and optionally insert your own key) if you are using retail or volume license ISOs -->
+                    <!--<Key>D2N9P-3P6X9-2R39C-7RTCD-MDVJX</Key>-->
+                    <WillShowUI>OnError</WillShowUI>
+                </ProductKey>
+                <AcceptEula>true</AcceptEula>
+                <FullName>Packer</FullName>
+                <Organization>Packer</Organization>
+            </UserData>
+        </component>
+    </settings>
+    <settings pass="specialize">
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <OEMInformation>
+                <HelpCustomized>false</HelpCustomized>
+            </OEMInformation>
+            <ComputerName>DEV-WIN</ComputerName>
+            <TimeZone>Korea Standard Time</TimeZone>
+            <RegisteredOwner/>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-OutOfBoxExperience" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <DoNotOpenInitialConfigurationTasksAtLogon>true</DoNotOpenInitialConfigurationTasksAtLogon>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Security-SPP-UX" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <SkipAutoActivation>false</SkipAutoActivation>
+        </component>
+        <!-- Enable RDP -->
+        <component name="Microsoft-Windows-TerminalServices-LocalSessionManager" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <fDenyTSConnections>false</fDenyTSConnections>
+        </component>
+        <component name="Networking-MPSSVC-Svc" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <FirewallGroups>
+                <FirewallGroup wcm:action="add" wcm:keyValue="RemoteDesktop">
+                    <Active>true</Active>
+                    <Group>@FirewallAPI.dll,-28752</Group>
+                    <Profile>all</Profile>
+                </FirewallGroup>
+            </FirewallGroups>
+        </component>
+    </settings>
+    <settings pass="oobeSystem">
+        <component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <InputLocale>en-US</InputLocale>
+            <SystemLocale>en-US</SystemLocale>
+            <UILanguage>en-US</UILanguage>
+            <UILanguageFallback>en-US</UILanguageFallback>
+            <UserLocale>en-US</UserLocale>
+        </component>
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<FirstLogonCommands>
+                <SynchronousCommand wcm:action="add">
+                    <CommandLine>powershell -ExecutionPolicy Bypass -File a:\configure-winrm.ps1</CommandLine>
+                    <Description>Run WinRM config</Description>
+                    <Order>1</Order>
+                    <RequiresUserInput>true</RequiresUserInput>
+                </SynchronousCommand>
+            </FirstLogonCommands>
+            <OOBE>
+                <HideEULAPage>true</HideEULAPage>
+                <HideLocalAccountScreen>true</HideLocalAccountScreen>
+                <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+                <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+                <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+                <NetworkLocation>Home</NetworkLocation>
+                <ProtectYourPC>1</ProtectYourPC>
+                <UnattendEnableRetailDemo>false</UnattendEnableRetailDemo>
+            </OOBE>
+            <UserAccounts>
+                <LocalAccounts>
+                    <LocalAccount wcm:action="add">
+                        <Password>
+                            <Value>Incheon-2022</Value>
+                            <PlainText>true</PlainText>
+                        </Password>
+                        <DisplayName>Appadmin</DisplayName>
+                        <Group>Administrators</Group>
+                        <Name>appadmin</Name>
+                    </LocalAccount>
+                </LocalAccounts>
+            </UserAccounts>
+            <TimeZone>Korea Standard Time</TimeZone>
+            <AutoLogon>
+                <Password>
+                    <Value>Incheon-2022</Value>
+                    <PlainText>true</PlainText>
+                </Password>
+                <Enabled>true</Enabled>
+                <LogonCount>2</LogonCount>
+                <Username>appadmin</Username>
+            </AutoLogon>
+            <RegisteredOwner/>
+        </component>
+    </settings>
+    <settings pass="offlineServicing">
+        <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-LUA-Settings" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            <EnableLUA>false</EnableLUA>
+        </component>
+    </settings>
+    <cpi:offlineImage xmlns:cpi="urn:schemas-microsoft-com:cpi" cpi:source="wim:c:/wim/install.wim#Windows Server 2019 SERVERSTANDARD"/>
+</unattend>
