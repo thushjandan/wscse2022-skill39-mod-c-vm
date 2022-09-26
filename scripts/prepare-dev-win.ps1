@@ -31,14 +31,16 @@ Code --install-extension redhat.ansible --force
 
 # Download docsets for Zeal
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-(New-Object System.Net.WebClient).DownloadFile("http://tokyo.kapeli.com/feeds/Python_3.tgz", 'C:\Windows\Temp\Python_3.tgz')
-(New-Object System.Net.WebClient).DownloadFile("http://tokyo.kapeli.com/feeds/Ansible.tgz", 'C:\Windows\Temp\Ansible.tgz')
-(New-Object System.Net.WebClient).DownloadFile("http://tokyo.kapeli.com/feeds/Jinja.tgz", 'C:\Windows\Temp\Jinja.tgz')
-(New-Object System.Net.WebClient).DownloadFile("http://tokyo.kapeli.com/feeds/Django.tgz", 'C:\Windows\Temp\Django.tgz')
+(New-Object System.Net.WebClient).DownloadFile("https://kapeli.com/feeds/zzz/versions/Python_3/3.9.2/Python_3.tgz", 'C:\Windows\Temp\Python_3.tgz')
+(New-Object System.Net.WebClient).DownloadFile("https://kapeli.com/feeds/zzz/versions/Ansible/2.10.8/Ansible.tgz", 'C:\Windows\Temp\Ansible.tgz')
+(New-Object System.Net.WebClient).DownloadFile("https://kapeli.com/feeds/zzz/versions/Jinja/2.11.3/Jinja.tgz", 'C:\Windows\Temp\Jinja.tgz')
+(New-Object System.Net.WebClient).DownloadFile("https://kapeli.com/feeds/zzz/versions/Django/2.2.7/Django.tgz", 'C:\Windows\Temp\Django.tgz')
+(New-Object System.Net.WebClient).DownloadFile("https://kapeli.com/feeds/zzz/versions/Flask/1.1.2/Flask.tgz", 'C:\Windows\Temp\Flask.tgz')
 (New-Object System.Net.WebClient).DownloadFile("https://drive.switch.ch/index.php/s/QLto1t9DH076F49/download", 'C:\Windows\Temp\CiscoYangModel.tar.gz')
 New-Item C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets -ItemType Directory
 tar -xzf C:\Windows\Temp\Python_3.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
 tar -xzf C:\Windows\Temp\Ansible.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
 tar -xzf C:\Windows\Temp\Jinja.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
+tar -xzf C:\Windows\Temp\Flask.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
 tar -xzf C:\Windows\Temp\Django.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
 tar -xzf C:\Windows\Temp\CiscoYangModel.tar.gz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets

@@ -6,6 +6,7 @@ mkdir -p /etc/ansible
 wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/customers.json
 wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/hosts
 wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/users.csv
+wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/.vault_pass
 
 apt-get install -y jq
 wget -nv -O /tmp/vscode.tar.gz https://update.code.visualstudio.com/latest/server-linux-x64/stable

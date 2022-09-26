@@ -32,9 +32,18 @@ chmod +x /tmp/zeal-cli
 su - appadmin -c 'mkdir -p /home/appadmin/.local/share/Zeal/Zeal/docsets'
 
 # Download docsets
-su - appadmin -c '/tmp/zeal-cli install Python_3 Ansible Jinja Flask Django'
 wget -nv -O /tmp/cisco-yangmodal.tar.gz "https://drive.switch.ch/index.php/s/QLto1t9DH076F49/download"
 su - appadmin -c 'tar -xzf /tmp/cisco-yangmodal.tar.gz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
+wget -nv -O /tmp/Ansible.tgz 'https://kapeli.com/feeds/zzz/versions/Ansible/2.10.8/Ansible.tgz'
+su - appadmin -c 'tar -xzf /tmp/Ansible.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
+wget -nv -O /tmp/Python_3.tgz 'https://kapeli.com/feeds/zzz/versions/Python_3/3.9.2/Python_3.tgz'
+su - appadmin -c 'tar -xzf /tmp/Python_3.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
+wget -nv -O /tmp/Flask.tgz 'https://kapeli.com/feeds/zzz/versions/Flask/1.1.2/Flask.tgz'
+su - appadmin -c 'tar -xzf /tmp/Flask.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
+wget -nv -O /tmp/Jinja.tgz 'https://kapeli.com/feeds/zzz/versions/Jinja/2.11.3/Jinja.tgz'
+su - appadmin -c 'tar -xzf /tmp/Jinja.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
+wget -nv -O /tmp/Django.tgz 'https://kapeli.com/feeds/zzz/versions/Django/2.2.7/Django.tgz'
+su - appadmin -c 'tar -xzf /tmp/Django.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
 
 # Install VSCode
 apt install -y gpg
