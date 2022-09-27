@@ -25,9 +25,9 @@ $validExitCodes = @( 0, 3010 )
 refreshenv
 
 # Install VSCode extensions
-Code --install-extension ms-vscode-remote.remote-ssh --force
-Code --install-extension ms-python.python --force
-Code --install-extension redhat.ansible --force
+& "C:\Program Files\Microsoft VS Code\Code" --install-extension ms-vscode-remote.remote-ssh --force
+& "C:\Program Files\Microsoft VS Code\Code" --install-extension ms-python.python --force
+& "C:\Program Files\Microsoft VS Code\Code" --install-extension redhat.ansible --force
 
 # Download docsets for Zeal
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
