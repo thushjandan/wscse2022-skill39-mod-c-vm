@@ -69,9 +69,6 @@ all:
         hostname: "APPLIX-ROUTER-008"
   children:
     linux:
-      vars:
-        ansible_connection: winrm
-        ansible_port: 5985
       children:
         web:
           hosts:
@@ -96,6 +93,9 @@ all:
             LIN3:
             LIN5:
     windows:
+      vars:
+        ansible_connection: winrm
+        ansible_port: 5985
       children:
         dc:
           hosts:

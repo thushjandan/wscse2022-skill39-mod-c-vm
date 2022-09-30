@@ -16,7 +16,8 @@ source "vmware-iso" "wscse2022-debian-base" {
   iso_url = var.debian_iso_path
   iso_checksum = var.debian_iso_checksum
 
-  guest_os_type = "debian11-64"
+  version = 19
+  guest_os_type = "debian10-64"
   cpus = 2
   memory = 1024
   disk_size = 32768

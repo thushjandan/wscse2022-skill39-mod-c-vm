@@ -150,8 +150,26 @@ build {
         valid_exit_codes = [0,1]
     }
 
-    post-processor "checksum" {
-        checksum_types = ["sha1", "sha256"]
-        output = "output_wscse2022-${source.name}/packer_{{.BuildName}}_{{.ChecksumType}}.checksum"
+    post-processors {
+        post-processor "artifice" { # tell packer this is now the new artifact
+            files = [
+                "output_wscse2022-${source.name}/${upper(source.name)}.ovf",
+                "output_wscse2022-${source.name}/${upper(source.name)}-disk1.vmdk",
+                "output_wscse2022-${source.name}/${upper(source.name)}.vmsd",
+                "output_wscse2022-${source.name}/${upper(source.name)}.vmxf",
+                "output_wscse2022-${source.name}/${upper(source.name)}.nvram",
+                "output_wscse2022-${source.name}/${upper(source.name)}.mf"
+            ]
+        }
+
+        post-processor "checksum" {
+            checksum_types = ["sha256"]
+            output = "output_wscse2022-${source.name}/${upper(source.name)}.{{.ChecksumType}}.checksum"
+        }
+
+        post-processor "compress" {
+            output = "export/wscse2022-module-c-${source.name}.zip"
+        }
     }
+
 }

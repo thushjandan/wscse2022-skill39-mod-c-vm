@@ -1,0 +1,36 @@
+{
+    "devices": {
+      "RTR1": {
+        "hostname": "APPLIX-ROUTER-001",
+        "management_ip": "10.22.0.201"
+      },
+      "RTR2": {
+        "hostname": "APPLIX-ROUTER-002",
+        "management_ip": "10.22.0.202"
+      },
+      "RTR3": {
+        "hostname": "APPLIX-ROUTER-003",
+        "management_ip": "10.22.0.203"
+      },
+      "RTR4": {
+        "hostname": "APPLIX-ROUTER-004",
+        "management_ip": "10.22.0.204"
+      },
+      "RTR5": {
+        "hostname": "APPLIX-ROUTER-005",
+        "management_ip": "10.22.0.205"
+      },
+      "RTR6": {
+        "hostname": "APPLIX-ROUTER-006",
+        "management_ip": "10.22.0.206"
+      },
+      "RTR7": {
+        "hostname": "APPLIX-ROUTER-007",
+        "management_ip": "10.22.0.207"
+      },
+      "RTR8": {
+        "hostname": "APPLIX-ROUTER-008",
+        "management_ip": "10.22.0.208"
+      }
+    }
+  }

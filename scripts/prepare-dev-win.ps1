@@ -25,9 +25,9 @@ $validExitCodes = @( 0, 3010 )
 refreshenv
 
 # Install VSCode extensions
-& "C:\Program Files\Microsoft VS Code\Code" --install-extension ms-vscode-remote.remote-ssh --force
-& "C:\Program Files\Microsoft VS Code\Code" --install-extension ms-python.python --force
-& "C:\Program Files\Microsoft VS Code\Code" --install-extension redhat.ansible --force
+& "C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension ms-vscode-remote.remote-ssh --force
+& "C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension ms-python.python --force
+& "C:\Program Files\Microsoft VS Code\bin\code.cmd" --install-extension redhat.ansible --force
 
 # Download docsets for Zeal
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -44,3 +44,6 @@ tar -xzf C:\Windows\Temp\Jinja.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\
 tar -xzf C:\Windows\Temp\Flask.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
 tar -xzf C:\Windows\Temp\Django.tgz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
 tar -xzf C:\Windows\Temp\CiscoYangModel.tar.gz -C C:\Users\appadmin\AppData\Local\Zeal\Zeal\docsets
+
+# Download Postman Collection
+(New-Object System.Net.WebClient).DownloadFile("http://$env:PACKER_HTTP_ADDR/WSCSE2022_Module_C_API.postman_collection.json", "$HOME\Desktop\WSCSE2022_Module_C_API.postman_collection.json")

@@ -14,14 +14,14 @@ source "vmware-iso" "wscse2022-win-srv-base" {
     vmdk_name = "win-srv-base"
     display_name = "WSCSE2022: Windows Server Base"
     
-    version = 18
+    version = 19
 
     iso_url = var.win_srv_iso_path
     iso_checksum = var.win_srv_iso_checksum
 
     guest_os_type = "windows9srv-64"
-    cpus = 4
-    memory = 4096
+    cpus = 2
+    memory = 2048
     disk_adapter_type = "lsisas1068"
     disk_size = 25600
     disk_type_id = 0
@@ -49,7 +49,7 @@ source "vmware-iso" "wscse2022-win-srv-core-base" {
     vmdk_name = "win-srv-core-base"
     display_name = "WSCSE2022: Windows Server Core Base"
     
-    version = 18
+    version = 19
 
     iso_url = var.win_srv_iso_path
     iso_checksum = var.win_srv_iso_checksum

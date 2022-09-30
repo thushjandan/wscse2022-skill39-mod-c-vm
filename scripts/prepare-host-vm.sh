@@ -7,8 +7,9 @@ wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/customers.json
 wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/hosts
 wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/users.csv
 wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/.vault_pass
+wget -P /etc/ansible http://$PACKER_HTTP_ADDR/exam/api_cisco_devices.json
 
-apt-get install -y jq
+apt-get install -y jq socat python3-paramiko
 wget -nv -O /tmp/vscode.tar.gz https://update.code.visualstudio.com/latest/server-linux-x64/stable
 su - appadmin -c 'mkdir -p /home/appadmin/.vscode-server/bin'
 su - appadmin -c 'tar -xzf /tmp/vscode.tar.gz -C /home/appadmin/.vscode-server/bin'

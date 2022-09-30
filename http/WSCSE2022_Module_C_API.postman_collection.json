@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "55f53cf8-270f-4b71-b488-c3242e236c17",
+		"name": "WSCSE2022 - Module C Applix API",
+		"description": "API for Module C Test Project at WorldSkills Special Edition 2022.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Stats",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.applix.com/stats",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"postman.setEnvironmentVariable(\"token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "k3CBSWRJF4",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "charlotte",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.applix.com/login",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Whoami",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://api.applix.com/whoami",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"whoami"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "https://api.applix.com/logout",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customers",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ANewCustomer\",\n    \"username\": \"anewcustomer\",\n    \"password\": \"SuperSecure123$\",\n    \"domain_prefix\": \"anewcustomer\",\n    \"message\": \"Welcome to A new customer company.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.applix.com/customers",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Device Stats",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.applix.com/network/devices/stats?management_ip=10.22.0.205",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"network",
+						"devices",
+						"stats"
+					],
+					"query": [
+						{
+							"key": "management_ip",
+							"value": "10.22.0.205"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "BGP Stats",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.applix.com/network/devices/bgp?management_ip=10.22.0.206",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"network",
+						"devices",
+						"bgp"
+					],
+					"query": [
+						{
+							"key": "management_ip",
+							"value": "10.22.0.206"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Routes",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.applix.com/network/devices/routes?management_ip=10.22.0.201",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"network",
+						"devices",
+						"routes"
+					],
+					"query": [
+						{
+							"key": "management_ip",
+							"value": "10.22.0.201"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Loopback",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"number\": 21,\n    \"ip\": \"26.41.74.222/32\",\n    \"desc\": \"WSCSE2022 Loopback\",\n    \"management_ip\": \"10.22.0.201\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.applix.com/network/loopback",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"network",
+						"loopback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Loopback",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"number\": 21,\n    \"ip\": \"26.41.74.222/32\",\n    \"desc\": \"WSCSE2022 Loopback\",\n    \"management_ip\": \"10.22.0.201\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.applix.com/network/loopback",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"network",
+						"loopback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Healthz",
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.applix.com/healthz",
+					"protocol": "https",
+					"host": [
+						"api",
+						"applix",
+						"com"
+					],
+					"path": [
+						"healthz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

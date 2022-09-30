@@ -7,7 +7,7 @@ apt-get install -y task-gnome-desktop
 systemctl set-default graphical.target
 
 # Install OpenVM tools for Desktop
-apt-get install -y open-vm-tools-desktop
+apt-get install -y open-vm-tools-desktop gpg
 
 # Install zealdocs
 wget -nv -O /tmp/zeal.deb http://deb.debian.org/debian/pool/main/z/zeal/zeal_0.6.1-1.2~bpo11+1_amd64.deb
@@ -46,7 +46,6 @@ wget -nv -O /tmp/Django.tgz 'https://kapeli.com/feeds/zzz/versions/Django/2.2.7/
 su - appadmin -c 'tar -xzf /tmp/Django.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
 
 # Install VSCode
-apt install -y gpg
 wget -nv -O /tmp/vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 apt-get install -y /tmp/vscode.deb
 su - appadmin -c '/usr/bin/code --install-extension ms-vscode-remote.remote-ssh --force'
@@ -54,7 +53,7 @@ su - appadmin -c '/usr/bin/code --install-extension ms-python.python --force'
 su - appadmin -c '/usr/bin/code --install-extension redhat.ansible --force'
 
 # Install Pycharm Community
-version=2022.2.1
+version=2022.2.2
 wget -nv -O /tmp/pycharm.tar.gz https://download.jetbrains.com/python/pycharm-community-${version}.tar.gz
 tar -xzf /tmp/pycharm.tar.gz -C /opt
 mv /opt/pycharm* /opt/pycharm
@@ -92,3 +91,8 @@ Terminal=false
 Type=Application
 Categories=Development;
 EOF'
+
+# Download Postman collection for TP
+wget -nv -P /root http://$PACKER_HTTP_ADDR/WSCSE2022_Module_C_API.postman_collection.json
+cp /root/WSCSE2022_Module_C_API.postman_collection.json /home/appadmin/WSCSE2022_Module_C_API.postman_collection.json
+chown appadmin:appadmin /home/appadmin/WSCSE2022_Module_C_API.postman_collection.json

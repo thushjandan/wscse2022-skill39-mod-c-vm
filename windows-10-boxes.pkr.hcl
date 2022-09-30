@@ -13,7 +13,7 @@ source "vmware-iso" "wscse2022-win-10" {
     vmdk_name = "dev-win"
     display_name = "DEV-WIN"
     
-    version = 18
+    version = 19
 
     iso_url = var.win_10_iso_path
     iso_checksum = var.win_10_iso_checksum
@@ -59,8 +59,25 @@ build {
         ]
     }
 
-    post-processor "checksum" {
-        checksum_types = ["sha1", "sha256"]
-        output = "output_wscse2022-dev-win/packer_{{.BuildName}}_{{.ChecksumType}}.checksum"
+    post-processors {
+        post-processor "artifice" { # tell packer this is now the new artifact
+            files = [
+                "output_wscse2022-${source.name}/${upper(source.name)}.ovf",
+                "output_wscse2022-${source.name}/${upper(source.name)}-disk1.vmdk",
+                "output_wscse2022-${source.name}/${upper(source.name)}.vmsd",
+                "output_wscse2022-${source.name}/${upper(source.name)}.vmxf",
+                "output_wscse2022-${source.name}/${upper(source.name)}.nvram",
+                "output_wscse2022-${source.name}/${upper(source.name)}.mf"
+            ]
+        }
+
+        post-processor "checksum" {
+            checksum_types = ["sha256"]
+            output = "output_wscse2022-${source.name}/${upper(source.name)}.{{.ChecksumType}}.checksum"
+        }
+
+        post-processor "compress" {
+            output = "export/wscse2022-module-c-${source.name}.zip"
+        }
     }
 }
