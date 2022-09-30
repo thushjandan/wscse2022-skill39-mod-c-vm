@@ -155,8 +155,6 @@ build {
             files = [
                 "output_wscse2022-${source.name}/${upper(source.name)}.ovf",
                 "output_wscse2022-${source.name}/${upper(source.name)}-disk1.vmdk",
-                "output_wscse2022-${source.name}/${upper(source.name)}.vmsd",
-                "output_wscse2022-${source.name}/${upper(source.name)}.vmxf",
                 "output_wscse2022-${source.name}/${upper(source.name)}.nvram",
                 "output_wscse2022-${source.name}/${upper(source.name)}.mf"
             ]
@@ -168,7 +166,7 @@ build {
         }
 
         post-processor "compress" {
-            output = "export/wscse2022-module-c-${source.name}.zip"
+            output = "export/wscse2022-module-c-${source.name}.tar.gz"
         }
     }
 

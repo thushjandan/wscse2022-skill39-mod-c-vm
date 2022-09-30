@@ -8,12 +8,13 @@ variable "win_10_iso_checksum" {
     default = "sha256:81778447f77a2e88847c85be6413862338fe609598bf09cb54faaaabf950011b"
 }
 
-source "vmware-iso" "wscse2022-win-10" {
+source "vmware-iso" "dev-win" {
     vm_name = "DEV-WIN"
     vmdk_name = "dev-win"
     display_name = "DEV-WIN"
     
     version = 19
+    format = "ovf"
 
     iso_url = var.win_10_iso_path
     iso_checksum = var.win_10_iso_checksum
@@ -44,7 +45,7 @@ source "vmware-iso" "wscse2022-win-10" {
 
 build {
     sources = [
-        "sources.vmware-iso.wscse2022-win-10",
+        "sources.vmware-iso.dev-win",
     ]
     provisioner "powershell" {
         scripts = [
@@ -62,22 +63,20 @@ build {
     post-processors {
         post-processor "artifice" { # tell packer this is now the new artifact
             files = [
-                "output_wscse2022-${source.name}/${upper(source.name)}.ovf",
-                "output_wscse2022-${source.name}/${upper(source.name)}-disk1.vmdk",
-                "output_wscse2022-${source.name}/${upper(source.name)}.vmsd",
-                "output_wscse2022-${source.name}/${upper(source.name)}.vmxf",
-                "output_wscse2022-${source.name}/${upper(source.name)}.nvram",
-                "output_wscse2022-${source.name}/${upper(source.name)}.mf"
+                "output_wscse2022-dev-win/${upper(source.name)}.ovf",
+                "output_wscse2022-dev-win/${upper(source.name)}-disk1.vmdk",
+                "output_wscse2022-dev-win/${upper(source.name)}.nvram",
+                "output_wscse2022-dev-win/${upper(source.name)}.mf"
             ]
         }
 
         post-processor "checksum" {
             checksum_types = ["sha256"]
-            output = "output_wscse2022-${source.name}/${upper(source.name)}.{{.ChecksumType}}.checksum"
+            output = "output_wscse2022-dev-win/${upper(source.name)}.{{.ChecksumType}}.checksum"
         }
 
         post-processor "compress" {
-            output = "export/wscse2022-module-c-${source.name}.zip"
+            output = "export/wscse2022-module-c-${source.name}.tar.gz"
         }
     }
 }
