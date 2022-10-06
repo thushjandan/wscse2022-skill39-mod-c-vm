@@ -19,7 +19,7 @@ source "vmware-iso" "wscse2022-debian-base" {
   version = 19
   guest_os_type = "debian10-64"
   cpus = 2
-  memory = 1024
+  memory = 2048
   disk_size = 32768
   disk_type_id = 0
 

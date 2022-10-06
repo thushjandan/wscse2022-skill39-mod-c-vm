@@ -44,6 +44,8 @@ wget -nv -O /tmp/Jinja.tgz 'https://kapeli.com/feeds/zzz/versions/Jinja/2.11.3/J
 su - appadmin -c 'tar -xzf /tmp/Jinja.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
 wget -nv -O /tmp/Django.tgz 'https://kapeli.com/feeds/zzz/versions/Django/2.2.7/Django.tgz'
 su - appadmin -c 'tar -xzf /tmp/Django.tgz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
+wget -nv -O /tmp/FastAPI.tar.gz 'https://drive.switch.ch/index.php/s/c7LBpfVoR6w6iIn/download'
+su - appadmin -c 'tar -xzf /tmp/FastAPI.tar.gz -C /home/appadmin/.local/share/Zeal/Zeal/docsets'
 
 # Install VSCode
 wget -nv -O /tmp/vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'

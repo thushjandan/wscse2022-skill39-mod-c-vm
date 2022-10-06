@@ -56,7 +56,7 @@ source "vmware-iso" "wscse2022-win-srv-core-base" {
 
     guest_os_type = "windows9srv-64"
     cpus = 2
-    memory = 2048
+    memory = 4096
     disk_adapter_type = "lsisas1068"
     disk_size = 25600
     disk_type_id = 0
